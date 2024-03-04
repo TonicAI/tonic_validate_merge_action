@@ -48,9 +48,11 @@ validate_api = ValidateApi(validate_api_key)
 github_server = os.environ.get('GITHUB_SERVER_URL', None)
 github_repository = os.environ.get('GITHUB_REPOSITORY', None)
 github_sha = os.environ.get('GITHUB_SHA', None)
+github_ref_name = os.environ.get('GITHUB_REF_NAME', None)
 
 run_metadata = {
-    'commit_url': f"{github_server}/{github_repository}/commit/{github_sha}"
+    'commit_url': f"{github_server}/{github_repository}/commit/{github_sha}",
+    'github_ref_name': github_ref_name
 }
 
 validate_api.upload_run(validate_project_id, run, run_metadata)
