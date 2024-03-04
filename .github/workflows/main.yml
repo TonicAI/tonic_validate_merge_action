@@ -1,6 +1,10 @@
 name: Merge Action
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'master'
+      - 'main'
 
 jobs:
   tonic_validate:
@@ -11,7 +15,6 @@ jobs:
       AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY}}
       AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT}}
       TONIC_VALIDATE_API_KEY: ${{ secrets.TONIC_VALIDATE_API_KEY }}
-
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4    
