@@ -18,7 +18,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4    
       - name: Run Tonic Validate Action
-        uses: ../action.yml
+        uses: ./
         with:
           llm_response_path: ./sample.json
           tonic_validate_project_id: ${{ secrets.TONIC_VALIDATE_PROJECT_ID }}
