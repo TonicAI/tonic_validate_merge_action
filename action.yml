@@ -6,11 +6,11 @@ inputs:
     description: 'Enter path to LLM response file'
     required: true
     type: string
-  tonic_validate_server_project_id:
+  tonic_validate_project_id:
     description: 'Enter Tonic Validate server project ID'
     required: true
     type: string
-  tonic_validate_server_api_key:
+  tonic_validate_api_key:
     description: 'Enter Tonic Validate server API key'
     required: true
     type: string
