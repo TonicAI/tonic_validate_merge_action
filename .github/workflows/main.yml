@@ -7,10 +7,18 @@ on:
       - 'main'
 
 jobs:
-  run_tonic_validate:
+  tonic_validate:
     runs-on: ubuntu-latest
+    name: Tonic Validate
+    env:
+      OPENAI_API_KEY:  ${{ secrets.OPENAI_API_KEY }}
+      AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY}}
+      AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT}}
     steps:
       - name: Run Tonic Validate Action
         uses: ./action.yml
         with:
-          llm_response_path: 'path/to/your/response/file'
+          llm_response_path: './sample.json'
+          tonic_validate_server_project_id: ${{ secrets.TONIC_VALIDATE_SERVER_PROJECT_ID }}
+          tonic_validate_server_api_key: ${{ secrets.TONIC_VALIDATE_SERVER_API_KEY }}
+  

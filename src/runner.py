@@ -1,10 +1,19 @@
 import json
 import os
+import sys
 from tabulate import tabulate
 from typing import List
-from tonic_validate import BenchmarkItem, LLMResponse, ValidateScorer
+from tonic_validate import BenchmarkItem, LLMResponse, ValidateApi, ValidateScorer
 
 path_to_responses = os.environ.get('VALIDATE_RESPONSES_PATH', None)
+validate_api_key = os.environ.get('TONIC_VALIDATE_SERVER_API_KEY', None)
+validate_project_id = os.environ.get('TONIC_VALIDATE_SERVER_PROJECT_ID', None)
+
+if validate_api_key is None:
+    exit('Error: You must specify TONIC_VALIDATE_SERVER_API_KEY, the API key for the Tonic Validate server')
+
+if validate_project_id is None:
+    exit('Error: You must specify TONIC_VALIDATE_SERVER_PROJECT_ID, the project ID for the Tonic Validate server')
 
 if path_to_responses is None:
     exit('Error: You must specify VALIDATE_RESPONSES_PATH, the path to your LLM question and responses')
@@ -40,4 +49,5 @@ for response in responses:
 scorer = ValidateScorer()
 run = scorer.score_responses(llm_responses)
 
-# write to server
+validate_api = ValidateApi(validate_api_key)
+validate_api.upload_run(validate_project_id, run)

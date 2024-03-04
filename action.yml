@@ -6,6 +6,14 @@ inputs:
     description: 'Enter path to LLM response file'
     required: true
     type: string
+  tonic_validate_server_project_id:
+    description: 'Enter Tonic Validate server project ID'
+    required: true
+    type: string
+  tonic_validate_server_api_key:
+    description: 'Enter Tonic Validate server API key'
+    required: true
+    type: string
 runs:
   using: 'composite'
   steps:
@@ -20,6 +28,8 @@ runs:
       id: tonic-validate
       env:
         TONIC_VALIDATE_GITHUB_ACTION: true
+        TONIC_VALIDATE_SERVER_PROJECT_ID: ${{ inputs.tonic_validate_server_project_id }}
+        TONIC_VALIDATE_SERVER_API_KEY: ${{ inputs.TONIC_VALIDATE_SERVER_API_KEY }}
         VALIDATE_RESPONSES_PATH: ${{ github.workspace	 }}/${{ inputs.llm_response_path }}
       run: python ${{ github.action_path }}/src/runner.py
       shell: bash
