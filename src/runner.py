@@ -33,22 +33,23 @@ with open(path_to_responses) as json_data:
 
 llm_responses: List[LLMResponse] = []
 for response in responses:
-    llm_context_list = []
+    llm_context_list = response.get('llm_context_list', [])
+    llm_answer = response.get('llm_answer', None)
+    benchmark_item = response.get('benchmark_item', None)
 
-    if 'llm_context_list' in response:
-        llm_context_list = response['llm_context_list']
-
-    if 'llm_answer' not in response:
+    if llm_answer is None:
         exit('Error: Each item must contain an "llm_answer" key')
-    
-    if 'benchmark_item' not in response:
+    if benchmark_item is None:
         exit('Error: Each item must contain a "benchmark_item" key with a "question" and "answer"')
     
-    if 'question' not in response['benchmark_item']:
+    # Question is required, but answer is optional
+    question = benchmark_item.get('question', None)
+    answer = benchmark_item.get('answer', None)
+    if question is None:
         exit('Error: Each benchmark_item must contain a "question" key')
     
-    l = LLMResponse(response['llm_answer'], llm_context_list, benchmark_item=BenchmarkItem(response['benchmark_item']['question'], response['benchmark_item'].get('answer', None)))
-    llm_responses.append(l)
+    response = LLMResponse(llm_answer, llm_context_list, benchmark_item=BenchmarkItem(question, answer))
+    llm_responses.append(response)
 
 scorer = ValidateScorer()
 run = scorer.score_responses(llm_responses)
