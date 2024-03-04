@@ -1,0 +1,16 @@
+name: Merge Action
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'main'
+
+jobs:
+  run_tonic_validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Tonic Validate Action
+        uses: ./action.yml
+        with:
+          llm_response_path: 'path/to/your/response/file'
