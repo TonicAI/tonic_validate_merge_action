@@ -25,6 +25,7 @@ def load_responses(path: str) -> List[LLMResponse]:
         ) for response in responses
     ]
 
+# Load environment variables
 validate_api_key = get_env_variable('TONIC_VALIDATE_SERVER_API_KEY', 'Error: TONIC_VALIDATE_SERVER_API_KEY is required.')
 validate_project_id = get_env_variable('TONIC_VALIDATE_SERVER_PROJECT_ID', 'Error: TONIC_VALIDATE_SERVER_PROJECT_ID is required.')
 path_to_responses = get_env_variable('VALIDATE_RESPONSES_PATH', 'Error: VALIDATE_RESPONSES_PATH is required.')
