@@ -42,11 +42,12 @@ for response in responses:
     if benchmark_item is None:
         exit('Error: Each item must contain a "benchmark_item" key with a "question" and "answer"')
     
-    # Question is required, but answer is optional
     question = benchmark_item.get('question', None)
     answer = benchmark_item.get('answer', None)
     if question is None:
         exit('Error: Each benchmark_item must contain a "question" key')
+    if answer is None:
+        exit('Error: Each benchmark_item must contain an "answer" key')
     
     response = LLMResponse(llm_answer, llm_context_list, benchmark_item=BenchmarkItem(question, answer))
     llm_responses.append(response)
