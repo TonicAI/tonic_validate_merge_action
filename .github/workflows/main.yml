@@ -18,7 +18,7 @@ jobs:
       - name: Run Tonic Validate Action
         uses: ./action.yml
         with:
-          llm_response_path: './sample.json'
-          tonic_validate_server_project_id: ${{ secrets.TONIC_VALIDATE_SERVER_PROJECT_ID }}
-          tonic_validate_server_api_key: ${{ secrets.TONIC_VALIDATE_SERVER_API_KEY }}
+          llm_response_path: ./sample.json
+          tonic_validate_project_id: ${{ secrets.TONIC_VALIDATE_PROJECT_ID }}
+          tonic_validate_api_key: ${{ secrets.TONIC_VALIDATE_API_KEY }}
   
