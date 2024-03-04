@@ -1,6 +1,8 @@
-# Tonic Validate for Main Merges
+# Tonic Validate for Merges to Main
 
-Github action to run Tonic Validate evaulation on main branch merges.  This action uses the open source [Tonic Validate library](https://github.com/TonicAI/tonic_validate) to help track LLM performance over time.
+Github action to run Tonic Validate evaulation on merges to main branch.  This action uses the open source [Tonic Validate library](https://github.com/TonicAI/tonic_validate) to help track LLM performance over time.
+
+![image](https://github.com/TonicAI/tonic_validate_merge_action/assets/78937627/4c5f6235-7b9c-4e25-8371-7e36f3c92cd5)
 
 # Setup
 
@@ -27,7 +29,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4      
       - name: Validate
-        uses: TonicAI/tonic_validate_pr_action@v0.1.0
+        uses: TonicAI/tonic_validate_merge_action@v0.1.0
         with:
           tonic_validate_project_id: <Tonic Validate Project Id>
           llm_response_path: <Path to Q&A for Evaluation>
