@@ -28,8 +28,8 @@ runs:
       id: tonic-validate
       env:
         TONIC_VALIDATE_GITHUB_ACTION: true
-        TONIC_VALIDATE_SERVER_PROJECT_ID: ${{ inputs.tonic_validate_server_project_id }}
-        TONIC_VALIDATE_SERVER_API_KEY: ${{ inputs.TONIC_VALIDATE_SERVER_API_KEY }}
+        TONIC_VALIDATE_SERVER_PROJECT_ID: ${{ inputs.tonic_validate_project_id }}
+        TONIC_VALIDATE_SERVER_API_KEY: ${{ inputs.tonic_validate_api_key }}
         VALIDATE_RESPONSES_PATH: ${{ github.workspace	 }}/${{ inputs.llm_response_path }}
       run: python ${{ github.action_path }}/src/runner.py
       shell: bash
