@@ -1,0 +1,28 @@
+# action.yaml
+name: 'Tonic Validate for PRs'
+description: 'A GitHub Action that uses Tonic Validate to evaluate your LLM application output'
+inputs:
+  llm_response_path:
+    description: 'Enter path to LLM response file'
+    required: true
+    type: string
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install Dependencies
+      run: pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash        
+    - name: Evaluate
+      id: tonic-validate
+      env:
+        TONIC_VALIDATE_GITHUB_ACTION: true
+        VALIDATE_RESPONSES_PATH: ${{ github.workspace	 }}/${{ inputs.llm_response_path }}
+      run: python ${{ github.action_path }}/src/runner.py
+      shell: bash
+branding:
+  color: gray-dark
+  icon: server        
