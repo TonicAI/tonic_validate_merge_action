@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import warnings
 from tabulate import tabulate
 from typing import List
 from tonic_validate import BenchmarkItem, LLMResponse, ValidateApi, ValidateScorer
@@ -8,6 +9,9 @@ from tonic_validate import BenchmarkItem, LLMResponse, ValidateApi, ValidateScor
 path_to_responses = os.environ.get('VALIDATE_RESPONSES_PATH', None)
 validate_api_key = os.environ.get('TONIC_VALIDATE_SERVER_API_KEY', None)
 validate_project_id = os.environ.get('TONIC_VALIDATE_SERVER_PROJECT_ID', None)
+
+repo_url = os.environ.get('GITHUB_REPO_URL', None)
+commit_sha = os.environ.get('GITHUB_COMMIT_ID', None)
 
 if validate_api_key is None:
     exit('Error: You must specify TONIC_VALIDATE_SERVER_API_KEY, the API key for the Tonic Validate server')
@@ -49,5 +53,14 @@ for response in responses:
 scorer = ValidateScorer()
 run = scorer.score_responses(llm_responses)
 
+run_metadata = {}
+
+if repo_url is not None and commit_sha is not None:
+    run_metadata = {
+        'commit_url': f"{repo_url}/commit/{commit_sha}"
+    }
+else:
+    warnings.warn('The repository URL and the commit SHA must be passed into the runner for the run to be associated with a commit.  You can set this up in the workflow file by passing in the deafult github variables, github.sha and github.repository_url')
+
 validate_api = ValidateApi(validate_api_key)
-validate_api.upload_run(validate_project_id, run)
+validate_api.upload_run(validate_project_id, run, run_metadata)
