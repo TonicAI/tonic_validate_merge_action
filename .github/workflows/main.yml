@@ -15,6 +15,8 @@ jobs:
       AZURE_OPENAI_KEY: ${{ secrets.AZURE_OPENAI_KEY}}
       AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT}}
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4    
       - name: Run Tonic Validate Action
         uses: ./action.yml
         with:
