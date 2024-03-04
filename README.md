@@ -2,6 +2,8 @@
 
 Github action to run Tonic Validate evaulation on main branch merges.  This action uses the open source [Tonic Validate library](https://github.com/TonicAI/tonic_validate) to help track LLM performance over time.
 
+![image](https://github.com/TonicAI/tonic_validate_merge_action/assets/78937627/4c5f6235-7b9c-4e25-8371-7e36f3c92cd5)
+
 # Setup
 
 To kick off a Tonic Validate evaluation after merging to your main branch, add the sample workflow to .github/workflows.
