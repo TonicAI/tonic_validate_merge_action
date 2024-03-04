@@ -14,12 +14,6 @@ inputs:
     description: 'Enter Tonic Validate server API key'
     required: true
     type: string
-  commit_id:
-    description: 'Commit ID for the current action run'
-    required: false
-  repo_url:
-    description: 'URL of the repository'
-    required: false
 runs:
   using: 'composite'
   steps:
@@ -37,8 +31,6 @@ runs:
         TONIC_VALIDATE_SERVER_PROJECT_ID: ${{ inputs.tonic_validate_project_id }}
         TONIC_VALIDATE_SERVER_API_KEY: ${{ inputs.tonic_validate_api_key }}
         VALIDATE_RESPONSES_PATH: ${{ github.workspace	 }}/${{ inputs.llm_response_path }}
-        GITHUB_COMMIT_ID: ${{ inputs.commit_id }}
-        GITHUB_REPO_URL: ${{ inputs.repo_url }}
       run: python ${{ github.action_path }}/src/runner.py
       shell: bash
 branding:

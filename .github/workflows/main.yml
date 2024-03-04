@@ -23,6 +23,4 @@ jobs:
           llm_response_path: ./sample.json
           tonic_validate_project_id: ${{ secrets.TONIC_VALIDATE_PROJECT_ID }}
           tonic_validate_api_key: ${{ secrets.TONIC_VALIDATE_API_KEY }}
-          commit_id: ${{ github.sha }}
-          repo_url: ${{ github.repository_url }}
   
