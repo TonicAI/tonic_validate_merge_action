@@ -9,13 +9,13 @@ if path_to_responses is None:
 if not os.path.exists(path_to_responses):
     exit('ERROR: The VALIDATE_RESPONSES_PATH provided ("{}") does not exist'.format(path_to_responses))
 
-validate_api_key = os.environ.get('TONIC_VALIDATE_SERVER_API_KEY', None)
+validate_api_key = os.environ.get('TONIC_VALIDATE_API_KEY', None)
 if validate_api_key is None:
-    exit('Error: You must specify TONIC_VALIDATE_SERVER_API_KEY, the API key for the Tonic Validate server')
+    exit('Error: You must specify TONIC_VALIDATE_API_KEY, the API key for the Tonic Validate server')
 
-validate_project_id = os.environ.get('TONIC_VALIDATE_SERVER_PROJECT_ID', None)
+validate_project_id = os.environ.get('TONIC_VALIDATE_PROJECT_ID', None)
 if validate_project_id is None:
-    exit('Error: You must specify TONIC_VALIDATE_SERVER_PROJECT_ID, the project ID for the Tonic Validate server')
+    exit('Error: You must specify TONIC_VALIDATE_PROJECT_ID, the project ID for the Tonic Validate server')
 
 openai_key = os.environ.get("OPENAI_API_KEY")
 azure_key = os.environ.get("AZURE_OPENAI_KEY")
